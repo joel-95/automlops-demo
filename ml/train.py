@@ -13,12 +13,15 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 def train():
     start_time = time.time()
     
-    with open("mlops.yaml", "r", encoding="utf-8") as f:
+    yaml_path = "mlops.yaml" if os.path.exists("mlops.yaml") else "demo_repo/mlops.yaml"
+    with open(yaml_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
     target_col = config.get("target_column", "species")
     num_features = config.get("numerical_features", [])
     data_path = config.get("dataset_path", "data/iris.csv")
+    if not os.path.exists(data_path) and os.path.exists(os.path.join("demo_repo", data_path)):
+        data_path = os.path.join("demo_repo", data_path)
 
     df = pd.read_csv(data_path)
     X = df[num_features]
