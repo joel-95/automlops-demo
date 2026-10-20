@@ -1,0 +1,17 @@
+project_name: "iris-classifier-demo"
+framework: "sklearn"
+task_type: "classification"
+entry_point: "ml/train.py"
+predict_module: "ml/predict.py"
+target_column: "species"
+numerical_features:
+  - "sepal_length"
+  - "sepal_width"
+  - "petal_length"
+  - "petal_width"
+categorical_features: []
+metrics_threshold:
+  accuracy: 0.85
+  precision: 0.80
+dependencies: "requirements.txt"
+dataset_path: "data/iris.csv"
